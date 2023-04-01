@@ -1,5 +1,6 @@
 """
-This code downloads historical stock prices for Apple from Yahoo Finance, calculates the daily returns, and uses mean-variance portfolio optimization to find the optimal portfolio weights that maximize the Sharpe ratio (the ratio of expected return to expected volatility).
+This code downloads historical stock prices for Apple from Yahoo Finance,calculates the daily returns,
+and uses mean-variance portfolio optimization to find the optimal portfolio weights that maximize the Sharpe ratio (the ratio of expected return to expected volatility).
 It then plots the efficient frontier of portfolios for a range of expected returns.
 """
 import numpy as np
