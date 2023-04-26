@@ -72,3 +72,30 @@ class GasTradingPredictor:
 
         gb_scores = cross_val_score(self.gb_best_model, self.analyzer.df[self.numerical_features + self.categorical_features], self.analyzer.df[self.target], cv=5, scoring='neg_mean_squared_error')
         self.gb_rmse = (-gb_scores.mean())**0.5
+
+        
+if __name__ == '__main__':
+    # Set up database and input variables
+    db_file = 'gas_trading_data.db'
+    table_name = 'gas_trading_table'
+    numerical_features = ['esg_metric_1', 'esg_metric_2', 'non_esg_metric_1', 'non_esg_metric_2']
+    categorical_features = ['region', 'industry']
+    target = 'gas_trading_performance'
+
+    # Create predictor object and clean the data
+    predictor = GasTradingPredictor(db_file, table_name, numerical_features, categorical_features, target)
+    predictor.clean_data()
+
+    # Set up parameter grid for grid search
+    param_grid = {
+        'model__n_estimators': [50, 100, 200],
+        'model__max_depth': [5, 10, 20]
+    }
+
+    # Fit models using grid search and evaluate their performance
+    predictor.fit_models(param_grid)
+    predictor.evaluate_models()
+
+    # Print the root mean squared error of the random forest and gradient boosting models
+    print(f'Random forest RMSE: {predictor.rf_rmse}')
+    print(f'Gradient boosting RMSE: {predictor.gb_rmse}')
