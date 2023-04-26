@@ -67,10 +67,19 @@ class GasTradingPredictor:
         """
         Evaluates the performance of the random forest and gradient boosting models using cross-validation.
         """
-        rf_scores = cross_val_score(self.rf_best_model, self.analyzer.df[self.numerical_features + self.categorical_features], self.analyzer.df[self.target], cv=5, scoring='neg_mean_squared_error')
+        rf_scores = cross_val_score(self.rf_best_model,
+                                    self.analyzer.df[self.numerical_features + self.categorical_features],
+                                    self.analyzer.df[self.target],
+                                    cv=5,
+                                    scoring='neg_mean_squared_error')
         self.rf_rmse = (-rf_scores.mean())**0.5
 
-        gb_scores = cross_val_score(self.gb_best_model, self.analyzer.df[self.numerical_features + self.categorical_features], self.analyzer.df[self.target], cv=5, scoring='neg_mean_squared_error')
+        gb_scores = cross_val_score(self.gb_best_model,
+                                    self.analyzer.df[self.numerical_features + self.categorical_features],
+                                    self.analyzer.df[self.target],
+                                    cv=5,
+                                    scoring='neg_mean_squared_error')
+        
         self.gb_rmse = (-gb_scores.mean())**0.5
 
         
