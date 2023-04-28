@@ -95,7 +95,7 @@ if __name__ == '__main__':
     predictor = TradingPredictor(db_file, table_name, numerical_features, categorical_features, target)
     predictor.clean_data()
 
-    # Set up parameter grid for grid search
+    # Set up a parameter grid for grid search
     param_grid = {
         'model__n_estimators': [50, 100, 200],
         'model__max_depth': [5, 10, 20]
